@@ -5,15 +5,14 @@ import {
   List,
   InputItem,
   WhiteSpace,
-  Radio,
   Button} from 'antd-mobile';
 import Logo from '../logo/logo'
-const Item = List.Item;
 
 class Register extends Component {
   state={
     username:'',
     password:'',
+
   };
   handelChange=(type,value)=>{
     this.setState({
@@ -34,7 +33,7 @@ class Register extends Component {
       <div>
         <NavBar >硅谷直聘</NavBar>
         <WhiteSpace/>
-        <img src="" alt=""/>
+        <img alt="img"/>
         <WhiteSpace/>
         <Logo/>
         <WhiteSpace/>
