@@ -21,33 +21,6 @@ class Register extends Component {
     rePassword: ''
   }
 
-  /* handleRadio = type => {
-   //得到单选按钮的类型，是老板还是大神
-   if (type === 'laoban') {
-   this.setState({
-   isBossChecked: true
-   })
-   } else {
-   this.setState({
-   isBossChecked: false
-   })
-   }
-   }*/
-
-  /*handleUsername = value => {
-   //更新状态
-   this.setState({
-   username: value
-   })
-   }
-
-   handlePassword = value => {
-   //更新状态
-   this.setState({
-   password: value
-   })
-   }*/
-
   handleChange = (type, value) => {
     //更新状态
     this.setState({
@@ -65,10 +38,6 @@ class Register extends Component {
   }
 
   goLogin = () => {
-    //去登录页面, 将地址切换为login
-    //会产生浏览历史记录
-    // this.props.history.push('/login');
-    //不会产生浏览历史记录
     this.props.history.replace('/login');
   }
 
@@ -76,6 +45,7 @@ class Register extends Component {
     const {laoban} = this.state;
     const {errMsg, redirectTo} = this.props.user;
 
+    //判断是否注册成功
     if (redirectTo) {
       //路由链接跳转
       return <Redirect to={redirectTo} />

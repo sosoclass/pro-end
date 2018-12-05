@@ -17,16 +17,13 @@ class Login extends Component {
   }
 
   handleChange = (type, value) => {
-    //更新状态
     this.setState({
       [type]: value
     })
   }
 
   login = async () => {
-    //收集表单数据
     const {password, username} = this.state;
-    //调用容器组件传递的更新状态的方法
     this.props.login({password, username});
   }
 

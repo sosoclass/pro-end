@@ -5,13 +5,17 @@ import {combineReducers} from 'redux';
 
 import {AUTH_SUCCESS, AUTH_ERROR} from './action-types';
 
-//初始化状态的值
 const initUserState = {
   username: '',
   type: '',
   _id: '',
   errMsg: '',
-  redirectTo: ''
+  redirectTo: '',
+  header:'',
+  post:'',
+  company:'',
+  info:'',
+  salary:''
 };
 
 function user(previousState = initUserState, action) {
@@ -49,8 +53,7 @@ function getRedirectPath(type, header) {
   return path;
 }
 
-//默认暴露合并后的reducers函数
-// {xxx: function xxx() {}, yyy: function yyy() {}}
+
 export default combineReducers({
   user
 })
