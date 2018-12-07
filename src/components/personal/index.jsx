@@ -18,12 +18,12 @@ class Personal extends Component {
       {text: '取消', onPress: () => {}},
       {text: '确认', onPress: () => {
         Cookies.remove('userid');
-
+        //清除redux中的状态
         this.props.resetUserList();
         this.props.resetUserInfo();
 
         this.props.history.replace('/login');
-      }},
+      }}
     ])
   }
 

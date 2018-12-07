@@ -10,20 +10,21 @@ import {reqRegister, reqLogin, reqUpdate, reqGetUserInfo, reqGetUserList} from '
 import {
   AUTH_SUCCESS,
   AUTH_ERROR,
-  UPDATA_USER_INFO,
+  UPDATE_USER_INFO,
   RESET_USER_INFO,
-  UPDATA_USER_LIST,
+  UPDATE_USER_LIST,
   RESET_USER_LIST
 } from './action-types';
 
 //定义同步action creator
 export const authSuccess = data => ({type: AUTH_SUCCESS, data});
 export const authError = data => ({type: AUTH_ERROR, data});
-export const updataUserInfo = data => ({type: UPDATA_USER_INFO, data});
+export const updateUserInfo = data => ({type: UPDATE_USER_INFO, data});
 export const resetUserInfo = data => ({type: RESET_USER_INFO, data});
-export const updataUserList = data => ({type:UPDATA_USER_LIST, data});
+export const updateUserList = data => ({type:UPDATE_USER_LIST, data});
 export const resetUserList = () => ({type:RESET_USER_LIST});
 //定义异步action creator
+//注册
 export const register = ({username, password, rePassword, type}) => {
   //表单验证
   if (!username) {
@@ -55,7 +56,7 @@ export const register = ({username, password, rePassword, type}) => {
       })
   }
 }
-
+//登录
 export const login = ({username, password}) => {
   //表单验证
   if (!username) {
@@ -83,7 +84,7 @@ export const login = ({username, password}) => {
   }
 
 }
-
+//信息完善
 export const update = ({header, post, company, salary, info, type}) => {
   //表单验证
   if (!header) {
@@ -115,13 +116,13 @@ export const update = ({header, post, company, salary, info, type}) => {
 
 }
 
-
+//获取用户信息
 export const getUserInfo = () => {
   return dispatch => {
     reqGetUserInfo()
       .then(({data}) => {
         if (data.code === 0) {
-          dispatch(updataUserInfo(data.data))
+          dispatch(updateUserInfo(data.data))
         } else {
           dispatch(resetUserInfo({errMsg: data.msg}))
         }
@@ -131,12 +132,13 @@ export const getUserInfo = () => {
       })
   }
 }
+//获取用户信息列表
 export const getUserList = type => {
   return dispatch => {
     reqGetUserList(type)
       .then(({data}) => {
         if (data.code === 0) {
-          dispatch(updataUserList(data.data))
+          dispatch(updateUserList(data.data))
         } else {
           dispatch(resetUserList())
         }

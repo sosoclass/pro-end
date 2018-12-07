@@ -6,9 +6,9 @@ import {combineReducers} from 'redux';
 import {
   AUTH_SUCCESS,
   AUTH_ERROR,
-  UPDATA_USER_INFO,
+  UPDATE_USER_INFO,
   RESET_USER_INFO,
-  UPDATA_USER_LIST,
+  UPDATE_USER_LIST,
   RESET_USER_LIST
 } from './action-types';
 
@@ -31,7 +31,7 @@ function user(previousState = initUserState, action) {
       return {...action.data, redirectTo: getRedirectPath(action.data.type, action.data.header)};
     case AUTH_ERROR :
       return {...initUserState, ...action.data};
-    case UPDATA_USER_INFO:
+    case UPDATE_USER_INFO:
       return {...action.data, redirectTo: getRedirectPath(action.data.type, action.data.header)};
     case RESET_USER_INFO:
       return {...initUserState, ...action.data};
@@ -43,7 +43,7 @@ function user(previousState = initUserState, action) {
 const initUserListState = [];
 function userList(previousState = initUserListState, action) {
   switch (action.type) {
-    case UPDATA_USER_LIST:
+    case UPDATE_USER_LIST:
       return action.data;
     case RESET_USER_LIST:
       return [];
