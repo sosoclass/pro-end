@@ -3,7 +3,14 @@
  */
 import {combineReducers} from 'redux';
 
-import {AUTH_SUCCESS, AUTH_ERROR} from './action-types';
+import {
+  AUTH_SUCCESS,
+  AUTH_ERROR,
+  UPDATA_USER_INFO,
+  RESET_USER_INFO,
+  UPDATA_USER_LIST,
+  RESET_USER_LIST
+} from './action-types';
 
 const initUserState = {
   username: '',
@@ -11,11 +18,11 @@ const initUserState = {
   _id: '',
   errMsg: '',
   redirectTo: '',
-  header:'',
-  post:'',
-  company:'',
-  info:'',
-  salary:''
+  header: '',
+  post: '',
+  company: '',
+  info: '',
+  salary: ''
 };
 
 function user(previousState = initUserState, action) {
@@ -24,14 +31,22 @@ function user(previousState = initUserState, action) {
       return {...action.data, redirectTo: getRedirectPath(action.data.type, action.data.header)};
     case AUTH_ERROR :
       return {...initUserState, ...action.data};
+    case UPDATA_USER_INFO:
+      return {...action.data, redirectTo: getRedirectPath(action.data.type, action.data.header)};
+    case RESET_USER_INFO:
+      return {...initUserState, ...action.data};
     default :
       return previousState;
   }
 }
 
-const initYyyState = {};
-function yyy(previousState = initYyyState, action) {
+const initUserListState = [];
+function userList(previousState = initUserListState, action) {
   switch (action.type) {
+    case UPDATA_USER_LIST:
+      return action.data;
+    case RESET_USER_LIST:
+      return [];
     default :
       return previousState;
   }
@@ -55,5 +70,6 @@ function getRedirectPath(type, header) {
 
 
 export default combineReducers({
-  user
+  user,
+  userList
 })

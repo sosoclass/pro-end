@@ -9,18 +9,20 @@ const Item = TabBar.Item;
 
 class Footer extends Component {
   static propTypes = {
-    navList: PropTypes.array.isRequired
+    navList: PropTypes.array.isRequired,
+    type: PropTypes.string.isRequired
   }
 
   redirectTo = path => {
     this.props.history.push(path);
   }
 
-  render () {
-    const type = 'laoban';
-    const filter = type === 'laoban' ? '/dashen' : '/laoban';
+  render() {
+    // const type = 'laoban';
+    // const filter = type === 'laoban' ? '/dashen' : '/laoban';
+
+    const filter = this.props.type === 'laoban' ? '/dashen' : '/laoban';
     const currNavList = this.props.navList.filter(item => filter === item.path ? false : true);
-    console.log(currNavList);
     return (
       <TabBar>
         {
@@ -30,7 +32,8 @@ class Footer extends Component {
             icon={<img className="footer-img" src={require(`./images/${item.icon}.png`)} alt={item.text}/>}
             onPress={this.redirectTo.bind(null, item.path)}
             selected={this.props.location.pathname === item.path}
-            selectedIcon={<img className="footer-img" src={require(`./images/${item.icon}-selected.png`)} alt={item.text}/>}
+            selectedIcon={<img className="footer-img" src={require(`./images/${item.icon}-selected.png`)}
+                               alt={item.text}/>}
           />)
         }
       </TabBar>
