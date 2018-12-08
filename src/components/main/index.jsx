@@ -9,16 +9,20 @@ import LaobanInfo from '../../containers/laoban-info';
 import DashenInfo from '../../containers/dashen-info';
 import Laoban from '../../containers/laoban';
 import Dashen from '../../containers/dashen';
-import Message from '../message';
+import Message from '../../containers/message';
 import Footer from '../footer';
 import Personal from '../../containers/personal';
+import Chat from '../../containers/chat';
 
 import './index.less'
+import {getChatList} from "../../redux/actions";
 
 class Main extends Component {
   static propTypes = {
     user:PropTypes.object.isRequired,
-    getUserInfo:PropTypes.func.isRequired
+    getUserInfo:PropTypes.func.isRequired,
+    getChatList:PropTypes.func.isRequired
+
   }
   navList = [
     {path: '/laoban', title: '大神列表', icon: 'laoban', text: '大神'},
@@ -26,6 +30,10 @@ class Main extends Component {
     {path: '/message', title: '消息列表', icon: 'message', text: '消息'},
     {path: '/personal', title: '个人中心', icon: 'personal', text: '个人'},
   ]
+
+  componentDidMount(){
+    this.props.getChatList();
+  }
 
 
   render() {
@@ -57,6 +65,7 @@ class Main extends Component {
           <Route path='/dashen' component={Dashen}/>
           <Route path='/message' component={Message}/>
           <Route path='/personal' component={Personal}/>
+          <Route path="/chat/:id" component={Chat}/>
           {currNav ? <Footer navList={this.navList} type={this.props.user.type}/> : null}
         </div>
 

@@ -9,7 +9,10 @@ import {
   UPDATE_USER_INFO,
   RESET_USER_INFO,
   UPDATE_USER_LIST,
-  RESET_USER_LIST
+  RESET_USER_LIST,
+  GET_CHAT_MESSAGES,
+  RESET_CHAT_MESSAGES,
+  UPDATE_CHAT_MESSAGES
 } from './action-types';
 
 const initUserState = {
@@ -52,6 +55,29 @@ function userList(previousState = initUserListState, action) {
   }
 }
 
+
+const initChatMessagesState = {
+  users:{},
+  chatMsgs:[]
+
+}
+
+function chatMessages(previousState=initChatMessagesState,action) {
+  switch (action.type){
+    case GET_CHAT_MESSAGES:
+      return action.data;
+    case RESET_CHAT_MESSAGES:
+      return initChatMessagesState;
+    case UPDATE_CHAT_MESSAGES :
+      return {
+        users: previousState.users,
+        chatMsgs: [...previousState.chatMsgs, action.data]
+      };
+    default:
+      return previousState
+  }
+}
+
 function getRedirectPath(type, header) {
   let path = '';
 
@@ -71,5 +97,6 @@ function getRedirectPath(type, header) {
 
 export default combineReducers({
   user,
-  userList
+  userList,
+  chatMessages
 })

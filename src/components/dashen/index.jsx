@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {Card, WingBlank, WhiteSpace} from 'antd-mobile';
 import PropTypes from 'prop-types';
 
+
 class Dashen extends Component {
   static propTypes = {
     userList: PropTypes.array.isRequired,
@@ -14,6 +15,10 @@ class Dashen extends Component {
     }
   }
 
+  goBack = id => {
+    this.props.history.push(`/chat/${id}`)
+  }
+
   render() {
     const userList = this.props.userList.filter(item => item.header);
 
@@ -23,7 +28,7 @@ class Dashen extends Component {
         {
           userList.map((item, index) => {
             return (
-              <div key={index}>
+              <div key={index} onClick={this.goBack.bind(null, item._id)}>
                 <Card >
                   <Card.Header
                     thumb={require(`../../assets/images/avatars/头像${+item.header + 1}.png`)}
